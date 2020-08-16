@@ -8,20 +8,12 @@ for (var k = 0; k < clothes.length; k++) {
     var price1 = clothes[k].price
    
 }
-function f (allcount,allcost){
-    if (allcount == 0) {
-        document.getElementById("noBasket").innerHTML = "В корзине нет товаров";
-    }
-    else { 
-         document.getElementById("noBasket").innerHTML = "Сумма вашей покупки " + allcost + " Всего товаров " + allcount; 
-    }
-    return 
-}
+//Начальное количество товаров
 var countShirt = 0;
 var countShoes = 0;
 var countJeans = 0;
 
-
+//подсчет стоимости товаров
 function countBasketPrice(countShirt, countShoes, countJeans) {
 
     var shirtCost = shirt.price * countShirt;
@@ -30,7 +22,7 @@ function countBasketPrice(countShirt, countShoes, countJeans) {
 
     return shirtCost + shoesCost + jeansCost
 }
-
+//подсчет количества товаров
 function allСountBasket(countShirt, countShoes, countJeans) {
     return countShirt + countShoes + countJeans
 }
@@ -40,22 +32,13 @@ var product = document.createElement("div");
 document.body.appendChild(product);
 product.classList.add("product");
 
-
-
-
-
+// массив для генерации имен
 
     mass = ['Shirt','Shoes','Jeans']
+    // массив для генерации изображений
     massImg = ['img/shirt.png','img/boots.png','img/jeans.png']
    
-
-      function createImg(q){
-        var img = document.createElement("IMG");
-        img.id    = q;
-        return img;
-      }
-
-      
+     // рисуем блоки+ пишем цену +рисуем товар 
       for (var i = 0; i < mass.length; i++) {
         var div = document.createElement('div');
         var nameBlock = "block"+ mass[i]
@@ -69,27 +52,11 @@ product.classList.add("product");
         var nameImg = "img"+ mass[i]
         img.id = nameImg
 
-        // var buttonIn = document.createElement("button");
-        // var namebuttonIn = "buttonIn"+ mass[i]
-        // div.appendChild(buttonIn)
-        // buttonIn.id = namebuttonIn
-        // nameBasket = 'Basket' + mass[i]
-        // buttonIn.onclick = nameBasket;
-        // buttonIn.innerHTML = "Добавить товар в корзину";
         
-        // var buttonOut = document.createElement("button");
-        // var namebuttonOut = "buttonOut"+ mass[i]
-        // div.appendChild(buttonOut)
-        // buttonOut.id = namebuttonOut
-        
-        // buttonOut.onclick = nameBasket;
-        // buttonIn.innerHTML = "Добавить товар в корзину";
-        
-
       }
 
 
-      //blockShirt
+      //кнопки для рубашки
 
       var buttonInShirt = document.createElement("button");buttonInShirt.id = 'buttonInShirt';buttonInShirt.onclick = BasketShirt;
       buttonInShirt.innerHTML = "Добавить товар в корзину";
@@ -97,7 +64,7 @@ product.classList.add("product");
       buttonOutShirt.innerHTML = "Убрать товар из корзины";
       blockShirt.appendChild(buttonInShirt);
       blockShirt.appendChild(buttonOutShirt);
-      //blockShoes
+      //кнопки для обуви
      
       var buttonInShoes = document.createElement("button");buttonInShoes.id = 'buttonInShoes';buttonInShoes.onclick = BasketShoes;
       buttonInShoes.innerHTML = "Добавить товар в корзину";
@@ -105,7 +72,7 @@ product.classList.add("product");
       buttonOutShoes.innerHTML = "Убрать товар из корзины";
       blockShoes.appendChild(buttonInShoes);
       blockShoes.appendChild(buttonOutShoes);
-      //blockJeans
+      //кнопки для джинсов
       
       var buttonInJeans = document.createElement("button");buttonInJeans.id = 'buttonInJeans';buttonInJeans.onclick = BasketJeans;
       buttonInJeans.innerHTML = "Добавить товар в корзину";
@@ -116,7 +83,7 @@ product.classList.add("product");
 
 
 
-//blockBasket
+//рисуем корзину и текст  в ней
 var allBasket = document.createElement("div");
 document.body.appendChild(allBasket);
 allBasket.classList.add("basket");
@@ -139,9 +106,17 @@ blockBasket.id = 'blockBasket';
 
 
 
-//логика(нет)
-
-
+//отображение цены корзины
+function f (allcount,allcost){
+    if (allcount == 0) {
+        document.getElementById("noBasket").innerHTML = "В корзине нет товаров";
+    }
+    else { 
+         document.getElementById("noBasket").innerHTML = "Сумма вашей покупки " + allcost + " Всего товаров " + allcount; 
+    }
+    return 
+}
+//добавление товара рубашка
 function BasketShirt(e){
     if (e.target == buttonInShirt){
             countShirt++
@@ -158,7 +133,7 @@ function BasketShirt(e){
     var shirtCost = shirt.price * countShirt;
 
     f(allcount,allcost);
-    if (countShirt==1){}
+    //отрисовка товара рубашка в корзине
     if (countShirt>0){
         if (document.getElementById("ShirtInBasket")){
             document.getElementById("ShirtInBasket").remove();
@@ -193,7 +168,7 @@ function BasketShirt(e){
     
     return countShirt   
 }
-
+//добавление товара обувь
 function BasketShoes(e){
     if (e.target == buttonInShoes){
         countShoes++
@@ -211,6 +186,7 @@ function BasketShoes(e){
     var allcost = countBasketPrice(countShirt, countShoes, countJeans);
     var allcount = allСountBasket(countShirt, countShoes, countJeans);
     f(allcount,allcost);
+    //отрисовка товара обувь в корзине
     if (countShoes>0){
         if (document.getElementById("ShoesInBasket")){
             document.getElementById("ShoesInBasket").remove();
@@ -245,6 +221,8 @@ function BasketShoes(e){
 }
 return countShoes 
 }
+
+//добавление товара обувь
 function BasketJeans(e){
     if (e.target == buttonInJeans){
         countJeans++
@@ -260,6 +238,7 @@ function BasketJeans(e){
     var allcost = countBasketPrice(countShirt, countShoes, countJeans);
     var allcount = allСountBasket(countShirt, countShoes, countJeans);
     f(allcount,allcost);
+    //отрисовка товара джинсы в корзине
     if (countJeans>0){
         if (document.getElementById("JeansInBasket")){
             document.getElementById("JeansInBasket").remove();
